@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Mencari Akar Persamaan Kuadrat</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { padding: 6px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h2>Mencari Akar dari Persamaan Kuadrat</h2>
+  <p>Bentuk umum: <strong>ax² + bx + c = 0</strong></p>
+
+  <label>Nilai a: <input type="number" id="a" /></label><br>
+  <label>Nilai b: <input type="number" id="b" /></label><br>
+  <label>Nilai c: <input type="number" id="c" /></label><br>
+
+  <button onclick="hitungAkar()">Hitung Akar</button>
+
+  <p id="hasil"></p>
+
+  <script>
+    function hitungAkar() {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b").value);
+      const c = parseFloat(document.getElementById("c").value);
+
+      const diskriminan = b * b - 4 * a * c;
+      let hasil = "";
+
+      if (a === 0) {
+        hasil = "Ini bukan persamaan kuadrat (a tidak boleh 0)";
+      } else if (diskriminan > 0) {
+        const x1 = (-b + Math.sqrt(diskriminan)) / (2 * a);
+        const x2 = (-b - Math.sqrt(diskriminan)) / (2 * a);
+        hasil = `Akar-akar real dan berbeda:<br>x₁ = ${x1}<br>x₂ = ${x2}`;
+      } else if (diskriminan === 0) {
+        const x = -b / (2 * a);
+        hasil = `Akar-akar real dan kembar:<br>x = ${x}`;
+      } else {
+        const real = -b / (2 * a);
+        const imajiner = Math.sqrt(-diskriminan) / (2 * a);
+        hasil = `Akar-akar kompleks:<br>x₁ = ${real} + ${imajiner}i<br>x₂ = ${real} - ${imajiner}i`;
+      }
+
+      document.getElementById("hasil").innerHTML = hasil;
+    }
+  </script>
+</body>
+</html>
