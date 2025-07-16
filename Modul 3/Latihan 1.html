@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Biodata Mahasiswa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #2e8b57;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 30px;
+      background: #e8ffe8;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: 30px auto;
+      display: none;
+    }
+
+    .output-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Formulir Biodata Mahasiswa</h2>
+
+  <form id="biodataForm">
+    <label for="nim">NIM:</label>
+    <input type="text" id="nim" name="nim" required>
+
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama" required>
+
+    <label>Jenis Kelamin:</label>
+    <input type="radio" name="jk" value="Laki-laki" required> Laki-laki
+    <input type="radio" name="jk" value="Perempuan"> Perempuan
+
+    <label for="agama">Agama:</label>
+    <select id="agama" name="agama" required>
+      <option value="">-- Pilih Agama --</option>
+      <option value="Islam">Islam</option>
+      <option value="Kristen">Kristen</option>
+      <option value="Hindu">Hindu</option>
+      <option value="Budha">Budha</option>
+      <option value="Lainnya">Lainnya</option>
+    </select>
+
+    <label>Status:</label>
+    <input type="radio" name="status" value="Belum Menikah" required> Belum Menikah
+    <input type="radio" name="status" value="Menikah"> Menikah
+
+    <label for="jurusan">Jurusan:</label>
+    <select id="jurusan" name="jurusan" required>
+      <option value="">-- Pilih Jurusan --</option>
+      <option value="Teknik Informatika">Teknik Informatika</option>
+      <option value="Sistem Informasi">Sistem Informasi</option>
+      <option value="Teknik Elektro">Teknik Elektro</option>
+      <option value="Manajemen">Manajemen</option>
+    </select>
+
+    <label for="komentar">Komentar:</label>
+    <textarea id="komentar" name="komentar" rows="4"></textarea>
+
+    <button type="button" onclick="tampilkanData()">KIRIM</button>
+  </form>
+
+  <div id="output">
+    <h3>Data Mahasiswa:</h3>
+    <p><span class="output-label">NIM:</span> <span id="outNim"></span></p>
+    <p><span class="output-label">Nama:</span> <span id="outNama"></span></p>
+    <p><span class="output-label">Jenis Kelamin:</span> <span id="outJK"></span></p>
+    <p><span class="output-label">Agama:</span> <span id="outAgama"></span></p>
+    <p><span class="output-label">Status:</span> <span id="outStatus"></span></p>
+    <p><span class="output-label">Jurusan:</span> <span id="outJurusan"></span></p>
+    <p><span class="output-label">Komentar:</span> <span id="outKomentar"></span></p>
+  </div>
+
+  <script>
+    function tampilkanData() {
+      document.getElementById("outNim").textContent = document.getElementById("nim").value;
+      document.getElementById("outNama").textContent = document.getElementById("nama").value;
+      document.getElementById("outJK").textContent = document.querySelector('input[name="jk"]:checked').value;
+      document.getElementById("outAgama").textContent = document.getElementById("agama").value;
+      document.getElementById("outStatus").textContent = document.querySelector('input[name="status"]:checked').value;
+      document.getElementById("outJurusan").textContent = document.getElementById("jurusan").value;
+      document.getElementById("outKomentar").textContent = document.getElementById("komentar").value;
+
+      document.getElementById("output").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pemesanan Tiket Travel IBIK Abadi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    h1 {
+      color: #007bff;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, select {
+      width: 300px;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      width: 500px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      margin-top: 30px;
+      border-collapse: collapse;
+      width: 500px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .gray {
+      background-color: #e6e6e6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pemesanan Tiket Travel IBIK Abadi</h1>
+
+  <form onsubmit="hitungHarga(event)">
+    <label>Nama Pemesan:
+      <input type="text" id="nama" required>
+    </label>
+
+    <label>Tujuan:
+      <select id="tujuan">
+        <option value="Jakarta">Jakarta</option>
+        <option value="Solo">Solo</option>
+        <option value="Surabaya">Surabaya</option>
+      </select>
+    </label>
+
+    <label>Kelas:
+      <select id="kelas">
+        <option value="Eksekutif">Eksekutif</option>
+        <option value="Bisnis">Bisnis</option>
+        <option value="Ekonomi">Ekonomi</option>
+      </select>
+    </label>
+
+    <label>Banyak Tiket:
+      <input type="number" id="jumlah" min="1" required>
+    </label>
+
+    <label>Status Member:
+      <select id="member">
+        <option value="ya">Ya</option>
+        <option value="tidak">Tidak</option>
+      </select>
+    </label>
+
+    <button type="submit">Hitung</button>
+  </form>
+
+  <div class="output" id="hasil"></div>
+
+  <table>
+    <tr>
+      <th></th>
+      <th>Eksekutif</th>
+      <th>Bisnis</th>
+      <th>Ekonomi</th>
+    </tr>
+    <tr class="gray">
+      <td>Jakarta</td>
+      <td>70000</td>
+      <td>40000</td>
+      <td>10000</td>
+    </tr>
+    <tr class="gray">
+      <td>Solo</td>
+      <td>80000</td>
+      <td>50000</td>
+      <td>20000</td>
+    </tr>
+    <tr class="gray">
+      <td>Surabaya</td>
+      <td>90000</td>
+      <td>60000</td>
+      <td>30000</td>
+    </tr>
+  </table>
+
+  <script>
+    const hargaTiket = {
+      Jakarta: { Eksekutif: 70000, Bisnis: 40000, Ekonomi: 10000 },
+      Solo: { Eksekutif: 80000, Bisnis: 50000, Ekonomi: 20000 },
+      Surabaya: { Eksekutif: 90000, Bisnis: 60000, Ekonomi: 30000 }
+    };
+
+    function hitungHarga(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const tujuan = document.getElementById("tujuan").value;
+      const kelas = document.getElementById("kelas").value;
+      const jumlah = parseInt(document.getElementById("jumlah").value);
+      const member = document.getElementById("member").value;
+
+      const harga = hargaTiket[tujuan][kelas];
+      const subtotal = harga * jumlah;
+      const diskon = member === "ya" ? subtotal * 0.10 : 0;
+      const total = subtotal - diskon;
+
+      document.getElementById("hasil").innerHTML = `
+        <strong>Nama:</strong> ${nama}<br>
+        <strong>Tujuan:</strong> ${tujuan}<br>
+        <strong>Kelas:</strong> ${kelas}<br>
+        <strong>Harga Tiket:</strong> Rp ${harga.toLocaleString()}<br>
+        <strong>Subtotal:</strong> Rp ${subtotal.toLocaleString()}<br>
+        <strong>Diskon:</strong> Rp ${diskon.toLocaleString()}<br>
+        <strong>Total Bayar:</strong> Rp ${total.toLocaleString()}
+      `;
+    }
+  </script>
+
+</body>
+</html>

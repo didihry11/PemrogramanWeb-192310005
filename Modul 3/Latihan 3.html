@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Perhitungan Faktorial dan Deret</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 400px;
+    }
+
+    td, th {
+      border: 1px solid #000;
+      padding: 8px;
+    }
+
+    th {
+      text-align: center;
+      background-color: #f2f2f2;
+      font-size: 18px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+    }
+
+    input[type="submit"], input[type="reset"] {
+      padding: 5px 15px;
+      margin-left: 5px;
+    }
+
+    .buttons {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <form onsubmit="hitung(event)" onreset="resetForm()">
+    <table>
+      <tr>
+        <th colspan="3">PERHITUNGAN<br>FAKTORIAL dan DERET</th>
+      </tr>
+      <tr>
+        <td>N</td>
+        <td colspan="2"><input type="text" id="nilaiN" required></td>
+      </tr>
+      <tr>
+        <td>Hasil</td>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td>Faktorial</td>
+        <td><input type="text" id="hasilFaktorial" readonly></td>
+        <td class="buttons" rowspan="2">
+          <input type="submit" value="Submit">
+          <input type="reset" value="Reset">
+        </td>
+      </tr>
+      <tr>
+        <td>Jumlah</td>
+        <td><input type="text" id="hasilJumlah" readonly></td>
+      </tr>
+    </table>
+  </form>
+
+  <script>
+    function hitung(event) {
+      event.preventDefault();
+
+      const n = parseInt(document.getElementById("nilaiN").value);
+
+      if (isNaN(n) || n < 0) {
+        alert("Masukkan bilangan bulat positif!");
+        return;
+      }
+
+      // Hitung faktorial
+      let faktorial = 1;
+      for (let i = 1; i <= n; i++) {
+        faktorial *= i;
+      }
+
+      // Hitung jumlah deret 1 + 2 + ... + n
+      const jumlah = (n * (n + 1)) / 2;
+
+      // Tampilkan hasil
+      document.getElementById("hasilFaktorial").value = faktorial;
+      document.getElementById("hasilJumlah").value = jumlah;
+    }
+
+    function resetForm() {
+      document.getElementById("hasilFaktorial").value = "";
+      document.getElementById("hasilJumlah").value = "";
+    }
+  </script>
+
+</body>
+</html>
